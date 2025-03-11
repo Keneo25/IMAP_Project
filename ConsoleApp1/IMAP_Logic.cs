@@ -25,27 +25,19 @@ public class ImapLogic
         Port = port;
     }
 
-    public void Connect(ImapClient client)
+    private void Connect(ImapClient client)
     {
         client.Connect(Host, Port, true);
         client.Authenticate(Username,Password);
     }
 
-    public void CheckOrCreateFolder(ImapClient client)
+    private void CheckFolder(ImapClient client)
     {
         var inbox = client.Inbox;
         inbox.Open(FolderAccess.ReadWrite);
-        var x = inbox.GetSubfolders().ToList();
-        IMailFolder? destination = null;
-        var exists = x.Any(p => p.Name == "OLD-RED");
-        if (!exists)
-        {
-            destination = inbox.Create("OLD-RED", true);
-        }
-        else
-        {
-            destination = inbox.GetSubfolder("OLD-RED");
-        }
+        var sub = inbox.GetSubfolders().ToList();
+        var exists = sub.Any(p => p.Name == "OLD-RED");
+        var destination = !exists ? inbox.Create("OLD-RED", true) : inbox.GetSubfolder("OLD-RED");
         while (true)
         {
             CheckForNewMessages(inbox, destination);
@@ -55,9 +47,10 @@ public class ImapLogic
     
     public void Run()
     {
+        
         using var client = new ImapClient();
         Connect(client);
-        CheckOrCreateFolder(client);
+        CheckFolder(client);
     }
     private void CheckForNewMessages(IMailFolder inbox, IMailFolder destination)
     {
@@ -87,8 +80,10 @@ public class ImapLogic
     
     private void SaveAttachmentFromMessage(List<MimeEntity> attachments)
     {
-        var path = "D:\\Pojekty\\Projek_Z_Trans\\fv";
-        Directory.CreateDirectory(path);
+        var folder = "attachments";
+        Directory.CreateDirectory(folder);
+        var current = Directory.GetCurrentDirectory();
+        var path = Path.Join(current, folder);
 
         foreach (var attachment in attachments.OfType<MimePart>())
         {
