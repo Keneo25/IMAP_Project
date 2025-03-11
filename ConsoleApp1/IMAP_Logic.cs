@@ -11,8 +11,6 @@ public class ImapLogic
 {
     public void Run()
     {
-        var cancellationTokenSource = new CancellationTokenSource();
-        var cancellationToken = cancellationTokenSource.Token;
         using var client = new ImapClient();
         
         string host = Environment.GetEnvironmentVariable("IMAP_HOST") ?? throw new InvalidOperationException("Brak IMAP_HOST");
@@ -74,7 +72,7 @@ public class ImapLogic
     
     private void SaveAttachmentFromMessage(List<MimeEntity> attachments)
     {
-        string path = "filepath";
+        string path = "D:\\Pojekty\\Projek_Z_Trans\\fv";
         Directory.CreateDirectory(path);
 
         foreach (var attachment in attachments.OfType<MimePart>())

@@ -19,3 +19,4 @@ D:\Pojekty\Projek_Z_Trans\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\refint\Consol
 D:\Pojekty\Projek_Z_Trans\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\ConsoleApp1.pdb
 D:\Pojekty\Projek_Z_Trans\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\ConsoleApp1.genruntimeconfig.cache
 D:\Pojekty\Projek_Z_Trans\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\ref\ConsoleApp1.dll
+D:\Pojekty\Projek_Z_Trans\ConsoleApp1\ConsoleApp1\obj\Debug\net8.0\ConsoleApp1.sourcelink.json
